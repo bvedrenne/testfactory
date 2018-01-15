@@ -1,11 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.fluttercode.datafactory</groupId>
-	<artifactId>datafactory</artifactId>
-	<version>0.9-SNAPSHOT</version>
+	<groupId>fr.bvedrenne.testfactory</groupId>
+	<artifactId>testfactory</artifactId>
+	<version>0.1-SNAPSHOT</version>
 
-	<name>DataFactory</name>
-	<description>Library to generate data for testing</description>
+	<name>TestFactory</name>
+	<description>Fork of DataFactory from Andy Gibson http://www.andygibson.net/blog/projects/
+Library to generate data for testing</description>
 
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -13,7 +14,6 @@
 		<version>3</version>
 	</parent>
 
-	<url>http://www.andygibson.net/blog/projects/</url>
 
 	<developers>
 		<developer>
@@ -36,9 +36,9 @@
 
 
 	<scm>
-		<connection>scm:git:git://github.com/andygibson/datafactory.git</connection>
-		<url>scm:git:git://github.com/andygibson/datafactory</url>
-		<developerConnection>scm:git:git@github.com:andygibson/datafactory.git</developerConnection>
+		<connection>scm:git:git://github.com/bvedrenne/testfactory.git</connection>
+		<url>scm:git:git://github.com/bvedrenne/testfactory</url>
+		<developerConnection>scm:git:git@github.com:bvedrenne/testfactory.git</developerConnection>
 	</scm>
 
 	<dependencies>
