@@ -3,11 +3,10 @@ package fr.bvedrenne.testfactory;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
-public class AddressBuilderTest {
-
+public class NameBuilderTest {
 	@Test
 	public void buildTest() {
-		AddressBuilder builder = AddressBuilder.getBuilder();
+		NameBuilder builder = NameBuilder.getBuilder();
 		Factory<String> build = builder.build();
 		Assertions.assertThat(build.nextValue()).isEmpty();
 		Assertions.assertThat(build.nextValue()).isEmpty();
@@ -16,7 +15,7 @@ public class AddressBuilderTest {
 
 	@Test
 	public void build2Test() {
-		AddressBuilder builder = AddressBuilder.getBuilder().withCity();
+		NameBuilder builder = NameBuilder.getBuilder().withFirstName();
 		Factory<String> build = builder.build();
 		Assertions.assertThat(build.nextValue()).isNotEmpty();
 		Assertions.assertThat(build.nextValue()).isNotEmpty();
@@ -25,7 +24,7 @@ public class AddressBuilderTest {
 
 	@Test
 	public void build3Test() {
-		AddressBuilder builder = AddressBuilder.getBuilder().withCity().withStreetName();
+		NameBuilder builder = NameBuilder.getBuilder().withFirstName().withName();
 		Factory<String> build = builder.build();
 		Assertions.assertThat(build.nextValue()).isNotEmpty();
 		Assertions.assertThat(build.nextValue()).isNotEmpty();
@@ -34,7 +33,7 @@ public class AddressBuilderTest {
 
 	@Test
 	public void build4Test() {
-		AddressBuilder builder = AddressBuilder.getBuilder().withCity().withStreetName().withAddressSuffix();
+		NameBuilder builder = NameBuilder.getBuilder().withName();
 		Factory<String> build = builder.build();
 		Assertions.assertThat(build.nextValue()).isNotEmpty();
 		Assertions.assertThat(build.nextValue()).isNotEmpty();

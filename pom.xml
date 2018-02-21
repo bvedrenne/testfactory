@@ -78,9 +78,6 @@ Library to generate data for testing</description>
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-
 		</plugins>
-
 	</build>
-
 </project>

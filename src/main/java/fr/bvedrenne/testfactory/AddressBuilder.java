@@ -1,11 +1,16 @@
 package fr.bvedrenne.testfactory;
 
+import java.util.Map.Entry;
+import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
+
 import org.fluttercode.datafactory.impl.DataFactory;
 
-public class AddressBuilder {
+public class AddressBuilder implements Builder {
 	private boolean city = false;
 	private boolean addressSuffix = false;
 	private boolean streetNames = false;
+	private Entry<Integer, Integer> streetNumber = null;
 
 	private AddressBuilder() {
 	}
@@ -29,31 +34,76 @@ public class AddressBuilder {
 		return this;
 	}
 
+	public AddressBuilder withStreetNumber() {
+		streetNumber = new Entry<Integer, Integer>() {
+			@Override
+			public Integer getKey() {
+				return null;
+			}
+
+			@Override
+			public Integer getValue() {
+				return null;
+			}
+
+			@Override
+			public Integer setValue(Integer value) {
+				return null;
+			}
+		};
+		return this;
+	}
+
+	public AddressBuilder withStreetNumber(int min, int max) {
+		streetNumber = new Entry<Integer, Integer>() {
+			@Override
+			public Integer getKey() {
+				return Math.min(min, max);
+			}
+
+			@Override
+			public Integer getValue() {
+				return Math.max(min, max);
+			}
+
+			@Override
+			public Integer setValue(Integer value) {
+				return Math.max(min, max);
+			}
+		};
+		return this;
+	}
+
+	@Override
 	public Factory<String> build() {
-		return new AddressFactory(streetNames, city, addressSuffix);
+		return new AddressFactory(streetNumber, streetNames, city, addressSuffix);
 	}
 
 	private class AddressFactory implements Factory<String> {
 		private boolean city = false;
 		private boolean addressSuffix = false;
 		private boolean streetNames = false;
+		private Entry<Integer, Integer> streetNumber = null;
 		private DataFactory dataFactory;
 
-		public AddressFactory(boolean streetNames, boolean city, boolean addressSuffix) {
+		public AddressFactory(Entry<Integer, Integer> streetNumber, boolean streetNames, boolean city,
+				boolean addressSuffix) {
 			this.streetNames = streetNames;
 			this.city = city;
 			this.addressSuffix = addressSuffix;
+			this.streetNumber = streetNumber;
 
 			dataFactory = DataFactory.createWithOriginalRandom();
 		}
 
 		@Override
 		public String nextValue() {
-			System.out.println(dataFactory.getAddress());
 			StringBuilder sb = new StringBuilder();
 			if (streetNames) {
-				sb.append(4);
-				sb.append(" ");
+				Optional.ofNullable(streetNumber).ifPresent(bound -> {
+					sb.append(ThreadLocalRandom.current().nextInt(bound.getKey(), bound.getValue() + 1));
+					sb.append(" ");
+				});
 				sb.append(dataFactory.getStreetName());
 				if (addressSuffix) {
 					sb.append(" ");
